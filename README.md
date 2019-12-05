@@ -73,11 +73,11 @@ pcd
    ├── TSUNAMI/                       
    │   ├── t0/                # *.jpg
    │   ├── t1/                # *.jpg
-   │   ├── mask/              # *.png (converted from *.bmp)
+   │   ├── mask/              # *.png
    ├── GSV/                       
        ├── t0/                # *.jpg
        ├── t1/                # *.jpg
-       ├── mask/              # *.png (converted from *.bmp)
+       ├── mask/              # *.png
 ```
 
 
