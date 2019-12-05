@@ -41,17 +41,57 @@ sh download_resnet.sh
 sh build_correlation_package.sh
 ```
 
+## Dataset
+TSUNAMI and GSV in Panoramic Change Detection dataset are available through an e-mail contact described [here](http://www.vision.is.tohoku.ac.jp/us/research/4d_city_modeling/pano_cd_dataset/) including the dataset used for five-fold cross validation in our paper, in which image cropping and data augumentation have been performed.
+
+Training
+```
+pcd_5cv        
+   ├── set0/                       
+   │   ├── train/             # *.jpg
+   │   ├── test/              # *.jpg
+   │   ├── mask/              # *.png
+   |   ├── train.txt
+   |   ├── test.txt
+   ├── set1/                       
+   ...   
+   ├── set2/
+   ...   
+   ├── set3/
+   ...
+   ├── set4/                       
+       ├── train/             # *.jpg
+       ├── test/              # *.jpg
+       ├── mask/              # *.png
+       ├── train.txt
+       ├── test.txt   
+```
+
+Testing
+```
+pcd                        
+   ├── TSUNAMI/                       
+   │   ├── t0/                # *.jpg
+   │   ├── t1/                # *.jpg
+   │   ├── mask/              # *.png (converted from *.bmp)
+   ├── GSV/                       
+       ├── t0/                # *.jpg
+       ├── t1/                # *.jpg
+       ├── mask/              # *.png (converted from *.bmp)
+```
+
+
 ## Training
 Train change detection network with correlation layers (CSCDNet)
 ```
-# i-th set of N-hold cross-validation  (0 <= i < N)
-python train.py  --cvset i --use-corr --datadir /path/to/data --checkpointdir /path/to/log --max-iteration 50000 --num-workers 16 --batch-size 32 --icount-plot 50 --icount-save 10000
+# i-th set of five-hold cross-validation  (0 <= i < 5)
+python train.py  --cvset i --use-corr --datadir /path/to/pcd_5cv --checkpointdir /path/to/log --max-iteration 50000 --num-workers 16 --batch-size 32 --icount-plot 50 --icount-save 10000
 ```
 
 Train change detection network without correlation layers (CDNet)
 ```
-# i-th set of N-hold cross-validation  (0 <= i < N)
-python train.py  --cvset i --datadir /path/to/data --checkpointdir /path/to/log --max-iteration 50000 --num-workers 16 --batch-size 32 --icount-plot 50 --icount-save 10000
+# i-th set of five-hold cross-validation  (0 <= i < 5)
+python train.py  --cvset i --datadir /path/to/pcd_5cv --checkpointdir /path/to/log --max-iteration 50000 --num-workers 16 --batch-size 32 --icount-plot 50 --icount-save 10000
 ```
 
 You can start a tensorboard session
@@ -63,11 +103,11 @@ tensorboard --logdir=/path/to/log
 ## Testing
 CSCDNet
 ```
-python test.py --use-corr --dataset PCD --datadir /path/to/data --checkpointdir /path/to/log/cscdnet/checkpoint
+python test.py --use-corr --dataset PCD --datadir /path/to/pcd --checkpointdir /path/to/log/cscdnet/checkpoint
 ```
 CDNet
 ```
-python test.py --dataset PCD --datadir /path/to/data --checkpointdir /path/to/log/cdnet/checkpoint
+python test.py --dataset PCD --datadir /path/to/pcd --checkpointdir /path/to/log/cdnet/checkpoint
 ```
 
 ## Citation
