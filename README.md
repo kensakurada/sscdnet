@@ -1,5 +1,5 @@
-# CSCDNet: Correlated Siamese Change Detection Network (CSCDNet)
-This is an official implementation of "Correlated Siamese Change Detection Network (CSCDNet)" in　"[Weakly Supervised Silhouette-based Semantic Change Detection](https://arxiv.org/abs/1811.11985)".
+# Semantic Scene Change Detection Network
+This is an official implementation of "Correlated Siamese Change Detection Network (CSCDNet)" and "Silhouette-based Semantic Change Detection Network (SSCDNet)" in　"[Weakly Supervised Silhouette-based Semantic Scene Change Detection](https://arxiv.org/abs/1811.11985)". (SSCDNet and PSCD datast are preparing...)
 
 <p align="center">
     <img src='https://drive.google.com/uc?export=view&id=1g0oPp5Kw4chnQ_FSyxc2TNdnNdlz9ZD0' width=95%/></a>
