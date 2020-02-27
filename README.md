@@ -113,11 +113,11 @@ python test.py --dataset PCD --datadir /path/to/pcd --checkpointdir /path/to/log
 ## Citation
 If you find this implementation useful in your work, please cite the paper. Here is a BibTeX entry:
 ```
-@article{sakurada2018weakly,
-  title={Weakly Supervised Silhouette-based Semantic Change Detection},
-  author={Sakurada, Ken},
-  journal={arXiv preprint arXiv:1811.11985},
-  year={2018}
+@article{sakurada2020weakly,
+  title={Weakly Supervised Silhouette-based Semantic Scene Change Detection},
+  author={Sakurada, Ken and Shibuya, Mikiya and Wang Weimin},
+  journal={Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)},
+  year={2020}
 }
 ```
 The preprint can be found [here](https://arxiv.org/abs/1811.11985).
