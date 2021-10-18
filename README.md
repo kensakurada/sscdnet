@@ -42,7 +42,8 @@ sh build_correlation_package.sh
 ```
 
 ## Dataset
-TSUNAMI and GSV in Panoramic Change Detection dataset are available through an e-mail contact described [here](http://www.vision.is.tohoku.ac.jp/us/research/4d_city_modeling/pano_cd_dataset/) including the dataset used for five-fold cross validation in our paper, in which image cropping and data augumentation have been performed.
+Please prepare the following format dataset using change detection datasets such as [TSUNAMI](https://kensakurada.github.io/pcd_dataset.html).
+In the case of a large dataset, it is not necessary to split it.
 
 Training
 ```
@@ -71,13 +72,9 @@ Testing
 ```
 pcd                        
    ├── TSUNAMI/                       
-   │   ├── t0/                # *.jpg
-   │   ├── t1/                # *.jpg
-   │   ├── mask/              # *.png
-   ├── GSV/                       
-       ├── t0/                # *.jpg
-       ├── t1/                # *.jpg
-       ├── mask/              # *.png
+      ├── t0/                # *.jpg
+      ├── t1/                # *.jpg
+      ├── mask/              # *.png
 ```
 
 

@@ -85,7 +85,7 @@ class Test:
 
             if self.args.dataset == 'PCD':
                 from dataset_pcd import PCD_full
-                for dataset in ['TSUNAMI', 'GSV']:
+                for dataset in ['TSUNAMI']:
                     loader_test = PCD_full(os.path.join(self.args.datadir,dataset), self.di.no_start, self.di.no_end, self.di.width, self.di.height)
                     for index in range(0,loader_test.__len__()):
                         if i_set * (10 / self.di.num_cv) <= (index % 10) < (i_set + 1) * (10 / self.di.num_cv):
