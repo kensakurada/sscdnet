@@ -85,7 +85,6 @@ class Training:
         # Training loop
         icount_loss = []
         while self.icount < self.args.max_iteration:
-            model_lr_scheduler.step()
             for step, (inputs_train, mask_train) in enumerate(dataset_train):
                 inputs_train = inputs_train.cuda()
                 mask_train = mask_train.cuda()
@@ -111,6 +110,9 @@ class Training:
 
                 if self.args.icount_save > 0 and self.icount % self.args.icount_save == 0:
                     self.checkpoint()
+
+            # Call lr_schduler.step() after optimizer.step()
+            model_lr_scheduler.step()
 
         f_loss.close()
 
@@ -160,7 +162,13 @@ class Training:
             filename = 'cscdnet-{0:08d}.pth'.format(self.icount)
         else:
             filename = 'cdnet-{0:08d}.pth'.format(self.icount)
-        torch.save(self.model.state_dict(), os.path.join(self.dn_save, filename))
+        
+        # Enable generic saving of module if using multiple GPU's
+        if torch.cuda.device_count() > 1:
+            torch.save(self.model.module.state_dict(), os.path.join(self.dn_save, filename))
+        else:
+            torch.save(self.model.state_dict(), os.path.join(self.dn_save, filename))
+                
         print('save: {0} (iteration: {1})'.format(filename, self.icount))
 
     def run(self):
@@ -171,6 +179,11 @@ class Training:
         else:
             print('Siamese Change Detection Network (Siamese CDResNet)')
             self.model = cscdnet.Model(inc=6, outc=2, corr=False, pretrained=True)
+
+        # Run on muliple GPU's if available
+        if torch.cuda.device_count() > 1:
+            print("Training with", torch.cuda.device_count(), "GPU's")
+            model = torch.nn.DataParallel(model)
 
         self.model = self.model.cuda()
         self.train()
